@@ -1,0 +1,33 @@
+export interface Issue {
+  active_lock_reason: null;
+  assignee: null;
+  assignees: string[];
+  author_association: string;
+  body: string;
+  closed_at: string | null;
+  closed_by: string | null;
+  comments: number;
+  comments_url: string | null;
+  created_at: string;
+  draft: boolean;
+  events_url: string;
+  html_url: string;
+  id: number;
+  labels: object[];
+  locked: boolean;
+  milestone: null;
+  node_id: string;
+  number: number;
+  performed_via_github_app: boolean | null;
+  pull_request: object | null | object[];
+  reactions: object[] | null | object;
+  repository_url: string;
+  state: string;
+  state_reason: string | null;
+  sub_issues_summary: object;
+  timeline_url: string;
+  title: string;
+  updated_at: string;
+  url: string;
+  user: object;
+}

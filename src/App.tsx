@@ -1,5 +1,5 @@
-import { HelloWorld } from './components/HelloWorld';
+import { Outlet } from 'react-router';
 
 export default function App() {
-  return <HelloWorld />;
+  return <Outlet />;
 }
