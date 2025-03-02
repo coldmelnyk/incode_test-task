@@ -1,8 +1,8 @@
 import { useRepo } from '../app/store.ts';
 import { useEffect, useState } from 'react';
-import { fetchRepo } from '../utils';
-import { Input, Button, ConfigProvider } from 'antd';
-import { buttonStyles, inputStyles } from '../utils/styles';
+import { cutRepoNamesFromUrl, fetchRepo } from '../utils';
+import { Input, Button, ConfigProvider, Breadcrumb } from 'antd';
+import { breadcrumbsStyles, buttonStyles, inputStyles } from '../utils/styles';
 
 export const MainPage = () => {
   const repoInfoArray = useRepo(state => state.repo);
@@ -11,13 +11,9 @@ export const MainPage = () => {
   const setIssues = useRepo(state => state.setIssues);
 
   const [inputValue, setInputValue] = useState<string>('');
+  const [breadcrumbsNames, setBreadcrumbsNames] = useState<string[]>([]);
 
-  useEffect(() => {
-    fetchRepo('facebook/react').then(resp => {
-      setRepo(resp[0]);
-      setIssues(resp[1]);
-    });
-  }, []);
+  useEffect(() => {}, []);
 
   console.log('Repo', repoInfoArray);
   console.log('Issues', issuesArray);
@@ -28,7 +24,8 @@ export const MainPage = () => {
         theme={{
           components: {
             Button: buttonStyles,
-            Input: inputStyles
+            Input: inputStyles,
+            Breadcrumb: breadcrumbsStyles
           }
         }}
       >
@@ -40,8 +37,40 @@ export const MainPage = () => {
               placeholder="Enter root link for GitHub repo"
             />
 
-            <Button>Load issues</Button>
+            <Button
+              onClick={() => {
+                const repoNamesArray = cutRepoNamesFromUrl(inputValue);
+
+                if (repoNamesArray.length === 2) {
+                  fetchRepo(`${repoNamesArray[0]}/${repoNamesArray[1]}`).then(
+                    resp => {
+                      setRepo(resp[0]);
+                      setIssues(resp[1]);
+                      setBreadcrumbsNames(repoNamesArray);
+                    }
+                  );
+                }
+              }}
+            >
+              Load issues
+            </Button>
           </div>
+
+          {breadcrumbsNames.length !== 0 && (
+            <div>
+              <Breadcrumb
+                separator=">"
+                items={[
+                  {
+                    title: `${breadcrumbsNames[0]}`
+                  },
+                  {
+                    title: `${breadcrumbsNames[1]}`
+                  }
+                ]}
+              />
+            </div>
+          )}
         </div>
       </ConfigProvider>
     </>
