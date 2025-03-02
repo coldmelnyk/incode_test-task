@@ -1,1 +1,1 @@
-export * from './fetchIssues.ts';
+export * from './fetchRepo.ts';

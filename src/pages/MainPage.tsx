@@ -1,20 +1,26 @@
-import { useIssues } from '../app/store.ts';
+import { useRepo } from '../app/store.ts';
 import { useEffect, useState } from 'react';
-import { fetchIssues } from '../utils';
+import { fetchRepo } from '../utils';
 import { Input, Button, ConfigProvider } from 'antd';
 import { buttonStyles, inputStyles } from '../utils/styles';
 
 export const MainPage = () => {
-  const issuesArray = useIssues(state => state.issues);
-  const setIssues = useIssues(state => state.setIssues);
+  const repoInfoArray = useRepo(state => state.repo);
+  const issuesArray = useRepo(state => state.issues);
+  const setRepo = useRepo(state => state.setRepo);
+  const setIssues = useRepo(state => state.setIssues);
 
   const [inputValue, setInputValue] = useState<string>('');
 
   useEffect(() => {
-    fetchIssues('facebook/react').then(resp => setIssues(resp));
+    fetchRepo('facebook/react').then(resp => {
+      setRepo(resp[0]);
+      setIssues(resp[1]);
+    });
   }, []);
 
-  console.log('Component re-rendered:', issuesArray);
+  console.log('Repo', repoInfoArray);
+  console.log('Issues', issuesArray);
 
   return (
     <>
@@ -34,7 +40,7 @@ export const MainPage = () => {
               placeholder="Enter root link for GitHub repo"
             />
 
-            <Button>Primary Button</Button>
+            <Button>Load issues</Button>
           </div>
         </div>
       </ConfigProvider>
