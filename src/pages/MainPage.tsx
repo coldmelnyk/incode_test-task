@@ -1,8 +1,8 @@
 import { useRepo } from '../app/store.ts';
 import { useEffect, useState } from 'react';
-import { cutRepoNamesFromUrl, fetchRepo } from '../utils';
-import { Input, Button, ConfigProvider, Breadcrumb } from 'antd';
+import { ConfigProvider } from 'antd';
 import { breadcrumbsStyles, buttonStyles, inputStyles } from '../utils/styles';
+import { SearchSection } from '../components';
 
 export const MainPage = () => {
   const repoInfoArray = useRepo(state => state.repo);
@@ -29,49 +29,14 @@ export const MainPage = () => {
           }
         }}
       >
-        <div className="p-3">
-          <div className="flex gap-4">
-            <Input
-              value={inputValue}
-              onChange={event => setInputValue(event.target.value)}
-              placeholder="Enter root link for GitHub repo"
-            />
-
-            <Button
-              onClick={() => {
-                const repoNamesArray = cutRepoNamesFromUrl(inputValue);
-
-                if (repoNamesArray.length === 2) {
-                  fetchRepo(`${repoNamesArray[0]}/${repoNamesArray[1]}`).then(
-                    resp => {
-                      setRepo(resp[0]);
-                      setIssues(resp[1]);
-                      setBreadcrumbsNames(repoNamesArray);
-                    }
-                  );
-                }
-              }}
-            >
-              Load issues
-            </Button>
-          </div>
-
-          {breadcrumbsNames.length !== 0 && (
-            <div>
-              <Breadcrumb
-                separator=">"
-                items={[
-                  {
-                    title: `${breadcrumbsNames[0]}`
-                  },
-                  {
-                    title: `${breadcrumbsNames[1]}`
-                  }
-                ]}
-              />
-            </div>
-          )}
-        </div>
+        <SearchSection
+          breadcrumbsNames={breadcrumbsNames}
+          setBreadcrumbsNames={setBreadcrumbsNames}
+          setInputValue={setInputValue}
+          inputValue={inputValue}
+          setIssues={setIssues}
+          setRepo={setRepo}
+        />
       </ConfigProvider>
     </>
   );
