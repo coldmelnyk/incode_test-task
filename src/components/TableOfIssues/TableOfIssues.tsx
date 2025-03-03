@@ -12,10 +12,10 @@ export const TableOfIssues: React.FC<Props> = () => {
 
 
   return (
-    <div className="grid grid-cols-3 gap-5 min-h-[50dvh]">
-      <IssuesColumn />
-      <IssuesColumn />
-      <IssuesColumn />
+    <div className="grid grid-cols-3 gap-5">
+      <IssuesColumn columnTitle='ToDo'/>
+      <IssuesColumn columnTitle='In Progress'/>
+      <IssuesColumn columnTitle='Done'/>
     </div>
   );
 };

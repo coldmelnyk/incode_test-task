@@ -2,6 +2,7 @@ import { Breadcrumb, Button, Input } from 'antd';
 import { cutRepoNamesFromUrl, fetchRepo } from '../../utils';
 import * as React from 'react';
 import { Issue, Repo } from '../../types';
+import cn from 'classnames';
 
 interface Props {
   inputValue: string;
@@ -43,7 +44,7 @@ export const SearchSection: React.FC<Props> = ({
                   setRepo(resp[0]);
                   setOpenedIssues(resp[1]);
                   setOpenedAndAssignedIssues(resp[2]);
-                  setClosedIssues(resp[3])
+                  setClosedIssues(resp[3]);
                   setBreadcrumbsNames(repoNamesArray);
                 }
               );
@@ -54,21 +55,23 @@ export const SearchSection: React.FC<Props> = ({
         </Button>
       </div>
 
-      {breadcrumbsNames.length !== 0 && (
-        <div>
-          <Breadcrumb
-            separator=">"
-            items={[
-              {
-                title: `${breadcrumbsNames[0]}`
-              },
-              {
-                title: `${breadcrumbsNames[1]}`
-              }
-            ]}
-          />
-        </div>
-      )}
+      <div
+        className={cn('mt-2 opacity-0', {
+          'opacity-100': breadcrumbsNames.length !== 0
+        })}
+      >
+        <Breadcrumb
+          separator=">"
+          items={[
+            {
+              title: `${breadcrumbsNames[0]}`
+            },
+            {
+              title: `${breadcrumbsNames[1]}`
+            }
+          ]}
+        />
+      </div>
     </section>
   );
 };
