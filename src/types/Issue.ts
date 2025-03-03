@@ -29,5 +29,25 @@ export interface Issue {
   title: string;
   updated_at: string;
   url: string;
-  user: object;
+  user: {
+    avatar_url: string | null;
+    events_url: string | null;
+    followers_url: string | null;
+    following_url: string | null;
+    gists_url: string;
+    gravatar_id: string | null;
+    html_url: string;
+    id: number;
+    login: string;
+    node_id: string;
+    organizations_url: string | null;
+    received_events_url: string | null;
+    repos_url: string;
+    site_admin: boolean;
+    starred_url: string;
+    subscriptions_url: string;
+    type: string;
+    url: string;
+    user_view_type: string;
+  };
 }
