@@ -3,14 +3,22 @@ import { Issue, Repo } from '../types';
 
 interface RepoState {
   repo: Repo | null;
-  issues: Issue[] | null;
+  openedIssues: Issue[] | null;
+  openedAndAssignedIssues: Issue[] | null;
+  closedIssues: Issue[] | null;
   setRepo: (repo: Repo) => void;
-  setIssues: (newIssues: Issue[]) => void;
+  setOpenedIssues: (newIssues: Issue[]) => void;
+  setOpenedAndAssignedIssues: (newIssues: Issue[]) => void;
+  setClosedIssues: (newIssues: Issue[]) => void;
 }
 
 export const useRepo = create<RepoState>((set) => ({
   repo: null,
-  issues: null,
+  openedIssues: null,
+  openedAndAssignedIssues: null,
+  closedIssues: null,
   setRepo: (newRepo: Repo) => set(() => ({ repo: newRepo })),
-  setIssues: (newIssues: Issue[]) => set(() => ({ issues: newIssues })),
+  setOpenedIssues: (newIssues: Issue[]) => set(() => ({ openedIssues: newIssues })),
+  setOpenedAndAssignedIssues: (newIssues: Issue[]) => set(() => ({ openedAndAssignedIssues: newIssues })),
+  setClosedIssues: (newIssues: Issue[]) => set(() => ({ closedIssues: newIssues })),
 }))

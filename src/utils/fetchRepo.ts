@@ -14,10 +14,14 @@ const fetchingByUrl = async (url: string) => {
 
 export const fetchRepo = async (path: string) => {
   const REPO_URL = `https://api.github.com/repos/${path}`;
-  const ISSUES_URL = `${REPO_URL}/issues`;
+  const OPENED_ISSUES_URL = `${REPO_URL}/issues?per_page=100&state=open&filter=created`;
+  const OPENED_AND_ASSIGNED_ISSUES__URL = `${REPO_URL}/issues?per_page=100&filter=assigned`;
+  const CLOSED_ISSUES__URL = `${REPO_URL}/issues?per_page=100&state=closed&filter=all`;
 
   return await Promise.all([
     fetchingByUrl(REPO_URL),
-    fetchingByUrl(ISSUES_URL)
+    fetchingByUrl(OPENED_ISSUES_URL),
+    fetchingByUrl(OPENED_AND_ASSIGNED_ISSUES__URL),
+    fetchingByUrl(CLOSED_ISSUES__URL),
   ]);
 };

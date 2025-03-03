@@ -7,7 +7,9 @@ interface Props {
   inputValue: string;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   setRepo: (repo: Repo) => void;
-  setIssues: (newIssues: Issue[]) => void;
+  setOpenedIssues: (newIssues: Issue[]) => void;
+  setOpenedAndAssignedIssues: (newIssues: Issue[]) => void;
+  setClosedIssues: (newIssues: Issue[]) => void;
   breadcrumbsNames: string[];
   setBreadcrumbsNames: React.Dispatch<React.SetStateAction<string[]>>;
 }
@@ -18,10 +20,12 @@ export const SearchSection: React.FC<Props> = ({
   setBreadcrumbsNames,
   breadcrumbsNames,
   setRepo,
-  setIssues
+  setOpenedIssues,
+  setOpenedAndAssignedIssues,
+  setClosedIssues
 }) => {
   return (
-    <section className="p-3">
+    <section>
       <div className="flex gap-4">
         <Input
           value={inputValue}
@@ -37,7 +41,9 @@ export const SearchSection: React.FC<Props> = ({
               fetchRepo(`${repoNamesArray[0]}/${repoNamesArray[1]}`).then(
                 resp => {
                   setRepo(resp[0]);
-                  setIssues(resp[1]);
+                  setOpenedIssues(resp[1]);
+                  setOpenedAndAssignedIssues(resp[2]);
+                  setClosedIssues(resp[3])
                   setBreadcrumbsNames(repoNamesArray);
                 }
               );
