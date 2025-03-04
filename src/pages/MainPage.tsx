@@ -1,7 +1,7 @@
 import { useRepo } from '../app/store.ts';
 import { useState } from 'react';
 import { ConfigProvider } from 'antd';
-import { breadcrumbsStyles, buttonStyles, inputStyles } from '../utils/styles';
+import { breadcrumbsStyles, buttonStyles, inputStyles } from '../utils';
 import { SearchSection, TableOfIssues } from '../components';
 
 export const MainPage = () => {
@@ -46,6 +46,7 @@ export const MainPage = () => {
           setOpenedAndAssignedIssues={setOpenedAndAssignedIssues}
           setClosedIssues={setClosedIssues}
           setRepo={setRepo}
+          repoInfoArray={repoInfoArray}
         />
 
         <TableOfIssues

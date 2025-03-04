@@ -10,7 +10,7 @@ interface Props {
 export const IssuesColumn: React.FC<Props> = ({ columnTitle, issuesArray }) => {
   return (
     <section className="flex flex-col">
-      <p className="h-10 text-center leading-10">{columnTitle}</p>
+      <p className="h-12 text-center leading-[48px]">{columnTitle}</p>
 
       <div className="flex flex-col gap-2 items-center bg-gray-400 border border-black p-2 min-h-[50dvh]">
         {issuesArray && (
