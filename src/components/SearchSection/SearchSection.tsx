@@ -31,7 +31,7 @@ export const SearchSection: React.FC<Props> = ({
   setClosedIssues,
   repoInfoArray,
   setIsLoading,
-  isLoading,
+  isLoading
 }) => {
   const handleFetchingRepoOnClick = () => {
     setIsLoading(true);
@@ -45,9 +45,9 @@ export const SearchSection: React.FC<Props> = ({
         setOpenedAndAssignedIssues(resp[2]);
         setClosedIssues(resp[3]);
         setBreadcrumbsNames(repoNamesArray);
-      });
 
-      setTimeout(() => setIsLoading(false), 2000);
+        setTimeout(() => setIsLoading(false), 1000);
+      });
     }
   };
 
