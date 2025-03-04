@@ -20,6 +20,7 @@ export const MainPage = () => {
 
   const [inputValue, setInputValue] = useState<string>('');
   const [breadcrumbsNames, setBreadcrumbsNames] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   console.log('Repo', repoInfoArray);
   console.log('Opened Issues', openedIssuesArray);
@@ -47,12 +48,15 @@ export const MainPage = () => {
           setClosedIssues={setClosedIssues}
           setRepo={setRepo}
           repoInfoArray={repoInfoArray}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
         />
 
         <TableOfIssues
           openedIssuesArray={openedIssuesArray}
           openedAndAssignedIssuesArray={openedAndAssignedIssuesArray}
           closedIssuesArray={closedIssuesArray}
+          isLoading={isLoading}
         />
       </ConfigProvider>
     </div>

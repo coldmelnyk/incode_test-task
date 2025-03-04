@@ -16,6 +16,8 @@ interface Props {
   breadcrumbsNames: string[];
   setBreadcrumbsNames: React.Dispatch<React.SetStateAction<string[]>>;
   repoInfoArray: Repo | null;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean;
 }
 
 export const SearchSection: React.FC<Props> = ({
@@ -27,9 +29,13 @@ export const SearchSection: React.FC<Props> = ({
   setOpenedIssues,
   setOpenedAndAssignedIssues,
   setClosedIssues,
-  repoInfoArray
+  repoInfoArray,
+  setIsLoading,
+  isLoading,
 }) => {
   const handleFetchingRepoOnClick = () => {
+    setIsLoading(true);
+
     const repoNamesArray = cutRepoNamesFromUrl(inputValue);
 
     if (repoNamesArray.length === 2) {
@@ -40,6 +46,8 @@ export const SearchSection: React.FC<Props> = ({
         setClosedIssues(resp[3]);
         setBreadcrumbsNames(repoNamesArray);
       });
+
+      setTimeout(() => setIsLoading(false), 2000);
     }
   };
 
@@ -67,7 +75,7 @@ export const SearchSection: React.FC<Props> = ({
         </Button>
       </form>
 
-      {repoInfoArray !== null ? (
+      {repoInfoArray !== null && !isLoading ? (
         <div
           className={cn('flex items-center gap-3 mt-2 opacity-0', {
             'opacity-100': breadcrumbsNames.length !== 0
