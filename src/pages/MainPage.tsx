@@ -1,5 +1,5 @@
 import { useRepo } from '../app/store.ts';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ConfigProvider } from 'antd';
 import { breadcrumbsStyles, buttonStyles, inputStyles } from '../utils/styles';
 import { SearchSection, TableOfIssues } from '../components';
@@ -20,8 +20,6 @@ export const MainPage = () => {
 
   const [inputValue, setInputValue] = useState<string>('');
   const [breadcrumbsNames, setBreadcrumbsNames] = useState<string[]>([]);
-
-  useEffect(() => {}, []);
 
   console.log('Repo', repoInfoArray);
   console.log('Opened Issues', openedIssuesArray);

@@ -6,9 +6,7 @@ export const cutRepoNamesFromUrl = (url: string) => {
       arrayOfPathsFromUrl = arrayOfPathsFromUrl.join('?').split('?');
     }
 
-    arrayOfPathsFromUrl.length = 2;
-
-    return arrayOfPathsFromUrl;
+    return [arrayOfPathsFromUrl[0], arrayOfPathsFromUrl[1]];
   }
 
   return [];

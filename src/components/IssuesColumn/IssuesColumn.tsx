@@ -9,7 +9,7 @@ interface Props {
 
 export const IssuesColumn: React.FC<Props> = ({ columnTitle, issuesArray }) => {
   return (
-    <div className="flex flex-col">
+    <section className="flex flex-col">
       <p className="h-10 text-center leading-10">{columnTitle}</p>
 
       <div className="flex flex-col gap-2 items-center bg-gray-400 border border-black p-2 min-h-[50dvh]">
@@ -19,6 +19,6 @@ export const IssuesColumn: React.FC<Props> = ({ columnTitle, issuesArray }) => {
           ))
         )}
       </div>
-    </div>
+    </section>
   );
 };
