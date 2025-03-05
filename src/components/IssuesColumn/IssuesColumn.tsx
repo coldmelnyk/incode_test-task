@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Issue } from '../../types';
 import { IssueCard } from '../IssueCard';
 import { Skeleton } from 'antd';
+import { useDroppable } from '@dnd-kit/core';
 
 interface Props {
   columnTitle: string;
@@ -14,11 +15,18 @@ export const IssuesColumn: React.FC<Props> = ({
   issuesArray,
   isLoading
 }) => {
+  const { isOver, setNodeRef } = useDroppable({
+    id: `${columnTitle}`
+  });
+  const style = {
+    color: isOver ? 'green' : undefined
+  };
+
   return (
     <section className="flex flex-col">
       <p className="h-12 text-center leading-[48px]">{columnTitle}</p>
 
-      <div className="flex flex-col gap-2 items-center bg-gray-400 border border-black p-2 min-h-[50dvh]">
+      <div ref={setNodeRef} style={style} className="flex flex-col gap-2 items-center bg-gray-400 border border-black p-2 min-h-[50dvh]">
         {isLoading ? (
           <>
             <Skeleton
@@ -36,9 +44,7 @@ export const IssuesColumn: React.FC<Props> = ({
           </>
         ) : (
           issuesArray &&
-          issuesArray.map(issue => (
-            <IssueCard key={issue.id} issue={issue} />
-          ))
+          issuesArray.map(issue => <IssueCard key={issue.id} issue={issue} />)
         )}
       </div>
     </section>
