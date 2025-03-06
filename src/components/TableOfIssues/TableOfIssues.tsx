@@ -2,8 +2,7 @@ import { IssuesColumn } from '../IssuesColumn';
 import * as React from 'react';
 import { Issue } from '../../types';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
-import { findIssueByEventId } from '../../utils/findIssueByEventId.ts';
-import { handlingIssueStore } from '../../utils/handlingIssueStore.ts';
+import { findIssueByEventId, handlingIssueStore } from '../../utils';
 
 interface Props {
   openedIssuesArray: Issue[] | null;
