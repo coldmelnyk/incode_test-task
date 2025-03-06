@@ -22,11 +22,6 @@ export const MainPage = () => {
   const [breadcrumbsNames, setBreadcrumbsNames] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  console.log('Repo', repoInfoArray);
-  console.log('Opened Issues', openedIssuesArray);
-  console.log('O & A Issues', openedAndAssignedIssuesArray);
-  console.log('Closed Issues', closedIssuesArray);
-
   return (
     <div className="p-3">
       <ConfigProvider
@@ -57,6 +52,9 @@ export const MainPage = () => {
           openedAndAssignedIssuesArray={openedAndAssignedIssuesArray}
           closedIssuesArray={closedIssuesArray}
           isLoading={isLoading}
+          setOpenedIssues={setOpenedIssues}
+          setOpenedAndAssignedIssues={setOpenedAndAssignedIssues}
+          setClosedIssues={setClosedIssues}
         />
       </ConfigProvider>
     </div>

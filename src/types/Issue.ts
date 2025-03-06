@@ -1,6 +1,6 @@
 export interface Issue {
   active_lock_reason: null;
-  assignee: null;
+  assignee: null | boolean | object;
   assignees: string[];
   author_association: string;
   body: string;

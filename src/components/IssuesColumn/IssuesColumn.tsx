@@ -24,9 +24,14 @@ export const IssuesColumn: React.FC<Props> = ({
 
   return (
     <section className="flex flex-col">
-      <p className="h-12 text-center leading-[48px]">{columnTitle}</p>
+      <p style={style} className="h-12 text-center leading-[48px]">
+        {columnTitle}
+      </p>
 
-      <div ref={setNodeRef} style={style} className="flex flex-col gap-2 items-center bg-gray-400 border border-black p-2 min-h-[50dvh]">
+      <div
+        ref={setNodeRef}
+        className="flex flex-col gap-2 items-center bg-gray-400 border border-black p-2 min-h-[50dvh]"
+      >
         {isLoading ? (
           <>
             <Skeleton
