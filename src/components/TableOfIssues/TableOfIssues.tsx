@@ -27,7 +27,7 @@ export const TableOfIssues: React.FC<Props> = ({
   closedIssuesArray
 }) => {
   const handleDragEnd = (event: DragEndEvent) => {
-    const id = event.active.id;
+    const id = event.active.id.toString();
 
     console.log(id);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

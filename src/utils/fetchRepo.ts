@@ -14,7 +14,7 @@ const fetchingByUrl = async (url: string) => {
 
 export const fetchRepo = async (path: string) => {
   const REPO_URL = `https://api.github.com/repos/${path}`;
-  const OPENED_ISSUES_URL = `${REPO_URL}/issues?per_page=100&state=open`;
+  const OPENED_ISSUES_URL = `${REPO_URL}/issues?per_page=100&state=open&assignee=none`;
   const OPENED_AND_ASSIGNED_ISSUES__URL = `${REPO_URL}/issues?per_page=100&state=open&assignee=*`;
   const CLOSED_ISSUES__URL = `${REPO_URL}/issues?per_page=100&state=closed`;
 
