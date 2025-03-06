@@ -29,7 +29,6 @@ export const TableOfIssues: React.FC<Props> = ({
   const handleDragEnd = (event: DragEndEvent) => {
     const id = event.active.id.toString();
 
-    console.log(id);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const draggedElement: DraggElement = findIssueByEventId({
