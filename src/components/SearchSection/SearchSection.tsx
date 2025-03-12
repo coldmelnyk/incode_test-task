@@ -39,15 +39,27 @@ export const SearchSection: React.FC<Props> = ({
     const repoNamesArray = cutRepoNamesFromUrl(inputValue);
 
     if (repoNamesArray.length === 2) {
-      fetchRepo(`${repoNamesArray[0]}/${repoNamesArray[1]}`).then(resp => {
-        setRepo(resp[0]);
-        setOpenedIssues(resp[1]);
-        setOpenedAndAssignedIssues(resp[2]);
-        setClosedIssues(resp[3]);
-        setBreadcrumbsNames(repoNamesArray);
-
-        setTimeout(() => setIsLoading(false), 1000);
-      });
+      fetchRepo(`${repoNamesArray[0]}/${repoNamesArray[1]}`)
+        .then(resp => {
+          switch (resp[0].status) {
+            case '404':
+              alert('Repository not found!');
+              break;
+            default:
+              setRepo(resp[0]);
+              setOpenedIssues(resp[1]);
+              setOpenedAndAssignedIssues(resp[2]);
+              setClosedIssues(resp[3]);
+              setBreadcrumbsNames(repoNamesArray);
+              break;
+          }
+        })
+        .finally(() => setTimeout(() => setIsLoading(false), 1000));
+    } else {
+      setTimeout(() => {
+        alert('Invalid GitHub link!');
+        setIsLoading(false);
+      }, 5000);
     }
   };
 
@@ -68,6 +80,7 @@ export const SearchSection: React.FC<Props> = ({
         />
 
         <Button
+          disabled={!inputValue.includes('github.com/')}
           className="border-black"
           onClick={() => handleFetchingRepoOnClick()}
         >
